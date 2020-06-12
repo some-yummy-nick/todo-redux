@@ -15,9 +15,12 @@ export class AddTodo extends PureComponent {
 
     render() {
         const {title} = this.state;
-        return <form action="" onSubmit={this.handleSubmit}>
-            <input type="text" name="title" value={title} onChange={this.handleOnChange}/>
-            <button type="submit">Добавить</button>
+        return <form onSubmit={this.handleSubmit} className="mb-2">
+            <div className="form-group">
+                <label htmlFor="title">Title</label>
+                <input type="text" name="title" className="form-control" id="title" value={title} onChange={this.handleOnChange}/>
+            </div>
+            <button className="btn btn-primary" type="submit">Добавить</button>
         </form>;
     }
 }

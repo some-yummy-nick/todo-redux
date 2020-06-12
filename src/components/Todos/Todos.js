@@ -25,18 +25,17 @@ export class Todos extends PureComponent {
 
     render() {
         const {items} = this.state;
-        return <>
+        return <div className="pt-2">
             <AddTodo addTodo={this.addTodo}/>
             {items ?
-                <ul>
+                <ul className="list-group mb-n2">
                     {
                         items.map(item => <Todo todo={item} key={item.id} handleRemove={this.removeTodo}/>)
                     }
                 </ul> :
                 <h1>Загрузка</h1>
             }
-
-        </>
+        </div>
 
     }
 }
