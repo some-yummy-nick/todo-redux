@@ -19,6 +19,10 @@ export class Todos extends PureComponent {
         this.setState({items: [todo, ...this.state.items]});
     };
 
+    removeTodo = id => {
+        this.setState({items: this.state.items.filter(item => item.id !== id)});
+    };
+
     render() {
         const {items} = this.state;
         return <>
@@ -26,7 +30,7 @@ export class Todos extends PureComponent {
             {items ?
                 <ul>
                     {
-                        items.map(item => <Todo todo={item} key={item.id}/>)
+                        items.map(item => <Todo todo={item} key={item.id} handleRemove={this.removeTodo}/>)
                     }
                 </ul> :
                 <h1>Загрузка</h1>
