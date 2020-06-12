@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import axios from "axios";
+import AddTodo from "components/AddTodo/AddTodo";
 import Todo from "components/Todo/Todo"
 
 export class Todos extends PureComponent {
@@ -14,9 +15,14 @@ export class Todos extends PureComponent {
             })
     }
 
+    addTodo = todo => {
+        this.setState({items: [todo, ...this.state.items]});
+    };
+
     render() {
         const {items} = this.state;
         return <>
+            <AddTodo addTodo={this.addTodo}/>
             {items ?
                 <ul>
                     {
