@@ -9,8 +9,10 @@ export class AddTodo extends PureComponent {
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.addTodo({id: Date.now(), title: this.state.title});
-        this.setState({title: ""});
+        if(this.state.title){
+            this.props.addTodo({id: Date.now(), title: this.state.title});
+            this.setState({title: ""});
+        }
     };
 
     render() {

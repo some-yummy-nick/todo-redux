@@ -1,43 +1,32 @@
 import React, {PureComponent} from "react";
-import axios from "axios";
+import {connect} from "react-redux";
+import {getTodos, addTodo, removeTodo} from "store/actions/todos";
 import AddTodo from "components/AddTodo/AddTodo";
 import Todo from "components/Todo/Todo"
 
 export class Todos extends PureComponent {
-    state = {
-        items: null,
-    };
-
     componentDidMount() {
-        axios.get("http://jsonplaceholder.typicode.com/todos")
-            .then(res => {
-                this.setState({items: res.data});
-            })
+        this.props.getTodos();
     }
 
-    addTodo = todo => {
-        this.setState({items: [todo, ...this.state.items]});
-    };
-
-    removeTodo = id => {
-        this.setState({items: this.state.items.filter(item => item.id !== id)});
-    };
-
     render() {
-        const {items} = this.state;
+        const {todos} = this.props;
         return <div className="pt-2">
-            <AddTodo addTodo={this.addTodo}/>
-            {items ?
+            <AddTodo addTodo={this.props.addTodo}/>
+            {todos ?
                 <ul className="list-group mb-n2">
                     {
-                        items.map(item => <Todo todo={item} key={item.id} handleRemove={this.removeTodo}/>)
+                        todos.map(item => <Todo todo={item} key={item.id} handleRemove={this.props.removeTodo}/>)
                     }
                 </ul> :
                 <h1>Загрузка</h1>
             }
         </div>
-
     }
 }
 
-export default Todos;
+const mapStateToProps = state => ({
+    todos: state.todos.items
+});
+
+export default connect(mapStateToProps, {getTodos, addTodo, removeTodo})(Todos);
