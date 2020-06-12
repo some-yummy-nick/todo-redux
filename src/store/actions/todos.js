@@ -5,7 +5,7 @@ export const REMOVE_TODO = "REMOVE_TODO";
 export const GET_TODOS = "GET_TODOS";
 
 export const getTodos = () => async dispatch => {
-    const res = await axios.get("http://jsonplaceholder.typicode.com/todos");
+    const res = await axios.get("https://jsonplaceholder.typicode.com/todos");
     dispatch({type: GET_TODOS, payload: res.data});
 };
 
